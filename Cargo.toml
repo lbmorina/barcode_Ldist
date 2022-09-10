@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 levenshtein = "1.0.5"
 itertools = "0.10"
+ndarray = "0.15.6"
