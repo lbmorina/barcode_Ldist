@@ -16,12 +16,12 @@ use std::{time::Instant,fs,env,collections::HashMap};
 fn calc_lev(barcodes:Vec<&str>)->HashMap<usize,usize>{
     let mut result:HashMap<usize,usize> = HashMap::new();
 
-    let mut start:i32 = 1;
-    let end:i32 = (barcodes.len()) as i32;
+    let mut start:usize = 1_usize;
+    let end:usize = barcodes.len();
     for bc in barcodes.iter(){
         for _ in start..end{
             //println!("{},{},{},{},{}",i,idx,bc,&barcodes[start as usize],huh);
-            let val = result.entry(levenshtein(bc,&barcodes[start as usize])).or_insert(0);
+            let val = result.entry(levenshtein(bc,&barcodes[start])).or_insert(0);
                 *val += 1; 
         }
         start +=1;
