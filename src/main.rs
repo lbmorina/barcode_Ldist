@@ -12,16 +12,14 @@ use std::{time::Instant,fs,env,collections::HashMap};
 */
 
 // we can make this function faster by inserting value i+j Ls (diagnonal)
-
+/// Calculates the L distance of barcode list and returns hashmap 
 fn calc_lev(barcodes:Vec<&str>)->HashMap<usize,usize>{
     let mut result:HashMap<usize,usize> = HashMap::new();
-
     let mut start:usize = 1_usize;
-    let end:usize = barcodes.len();
     for bc in barcodes.iter(){
-        for _ in start..end{
+        for i in start..barcodes.len(){
             //println!("{},{},{},{},{}",i,idx,bc,&barcodes[start as usize],huh);
-            let val = result.entry(levenshtein(bc,&barcodes[start])).or_insert(0);
+            let val = result.entry(levenshtein(bc,&barcodes[i])).or_insert(0);
                 *val += 1; 
         }
         start +=1;
@@ -34,9 +32,9 @@ fn main(){
     let args: Vec<String> = env::args().collect();
     let bcs = fs::read_to_string(&args[1]).expect("Error reading in the file");
     let mut bcs:Vec<&str>=bcs.split("\n").collect();
-    if bcs.last().unwrap().chars().count() == 0 {bcs.pop();}
-    let num_bcs = &bcs.len();
-    let hashy = calc_lev(bcs); // first argument is identity matrix cuz we only need to fill upper tri
+    if bcs.last().unwrap().chars().count() == 0 {bcs.pop();} // removes the last entry of vector if 0 length 
+    let num_bcs = &bcs.len(); // need to establish here because it we lose `bcs` on next line
+    let hashy = calc_lev(bcs); // hashmap of Len:Count
    
     println!("{:?} Barcodes found",num_bcs);
     println!("Dist\tCount");
