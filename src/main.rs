@@ -3,6 +3,7 @@ use levenshtein::levenshtein;
 use itertools::Itertools;
 use std::{time::Instant,fs,env,collections::HashMap};
 
+// run like: cargo run -- {barcode.file.txt}
 
 /* 
  can use ./hmm.txt for testing 
