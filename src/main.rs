@@ -52,7 +52,7 @@ fn main() {
     } // removes the last entry of vector if 0 length
     let num_bcs = &bcs.len(); // need to establish here because it we lose `bcs` on next line
     let bcs2 = bcs.clone();
-    let hashy = calc_lev(bcs); // hashmap of Len:Count
+    //let hashy = calc_lev(bcs); // hashmap of Len:Count
 
     // println!("Barcode file: {}", args[1]);
     // println!("Barcodes found: {:?}", num_bcs);
@@ -62,25 +62,28 @@ fn main() {
     // }
     //dbg!(&result);
 
-    let stop = now.elapsed();
-    // println!("Time Elapsed: {:.2?}", stop);
-    // Now let's write to a file?
     // println!();
 
     // println!("Testing out dictionary thing");
     let yeet = calc_lev_hashmap(bcs2);
 
-    print!("Barcode");
-    for (bc, _) in yeet.iter().sorted_by_key(|x| x.0) {
-        print!("\t{}", bc);
-    }
-    println!();
+    // print!("Barcode");
+    // for (bc, _) in yeet.iter().sorted_by_key(|x| x.0) {
+    //     print!("\t{}", bc);
+    // }
+    // println!();
 
-    for (bc1, bc2_map) in yeet.iter().sorted_by_key(|x| x.0) {
-        print!("{}", bc1);
-        for (_, l_dist) in bc2_map.iter().sorted_by_key(|x| x.0) {
-            print!("\t{}", l_dist);
-        }
-        println!();
-    }
+    // for (bc1, bc2_map) in yeet.iter().sorted_by_key(|x| x.0) {
+    //     print!("{}", bc1);
+    //     for (_, l_dist) in bc2_map.iter().sorted_by_key(|x| x.0) {
+    //         print!("\t{}", l_dist);
+    //     }
+    //     println!();
+    // }
+
+    let stop = now.elapsed();
+    println!("Barcode file: {}", args[1]);
+    println!("Barcodes found: {:?}", num_bcs);
+    println!("Time Elapsed: {:.2?}", stop);
+    // Now let's write to a file?
 }
